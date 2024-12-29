@@ -1,0 +1,128 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply antialiased;
+  }
+
+  /* Optimize typography for PDF */
+  h1 {
+    @apply text-3xl font-bold leading-tight;
+  }
+
+  h2 {
+    @apply text-2xl font-bold leading-tight;
+  }
+
+  p, li {
+    @apply leading-relaxed;
+  }
+}
+
+/* Print and PDF specific styles */
+@media print {
+  @page {
+    margin: 20mm;
+    size: A4 portrait;
+  }
+
+  body {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .no-print, .screen-only {
+    display: none !important;
+  }
+  
+  .print-only {
+    display: block !important;
+  }
+
+  /* Prevent unwanted page breaks */
+  section, .avoid-break {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  /* Keep headings with their content */
+  h1, h2, h3 {
+    page-break-after: avoid !important;
+    break-after: avoid !important;
+  }
+
+  /* Keep list items together */
+  li {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  /* Keep tables together */
+  table {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  /* Profile image optimization for print */
+  img {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  /* Optimize text for ATS */
+  p, li, span {
+    font-size: 11pt !important;
+    line-height: 1.5 !important;
+    color: black !important;
+    orphans: 3 !important; /* Minimum lines at bottom of page */
+    widows: 3 !important; /* Minimum lines at top of page */
+  }
+
+  h1 {
+    font-size: 18pt !important;
+    line-height: 1.2 !important;
+    margin-bottom: 12pt !important;
+  }
+
+  h2 {
+    font-size: 14pt !important;
+    line-height: 1.3 !important;
+    margin-bottom: 10pt !important;
+    margin-top: 16pt !important;
+  }
+
+  /* Section spacing */
+  section {
+    margin-bottom: 16pt !important;
+    padding-bottom: 8pt !important;
+  }
+
+  /* Enhance contact information readability */
+  .print-only p {
+    margin-bottom: 4pt !important;
+  }
+
+  /* Optimize links for PDF */
+  a {
+    text-decoration: none !important;
+    color: black !important;
+  }
+
+  /* Fix margin collapse issues */
+  .mb-12 {
+    margin-bottom: 16pt !important;
+    padding-bottom: 8pt !important;
+  }
+}
+
+@media screen {
+  .print-only {
+    display: none !important;
+  }
+}
+
+.no-print {
+  page-break-inside: avoid;
+}
